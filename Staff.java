@@ -18,12 +18,23 @@ public class Staff extends Person implements User {
         this.salaryStrategy = salaryStrategy;
     }
 
+    public void addHoursWorked(int hours) {
+        this.hoursWorked += hours;
+        System.out.println(this.getName() + " has now worked " + this.hoursWorked + " hours.");
+    }
 
+    public double paySalary() {
+        double salary = salaryStrategy.calculateSalary(hoursWorked, hourlyRate);
+        System.out.println(this.getName() + " earned a salary of: $" + salary);
+        hoursWorked = 0;
+        return salary;
+    }
 
     @Override
     public void addMoney(double amount) { }
 
-  
+    @Override
+    public void deductMoney(double amount) { }
 
     @Override
     public double getMoney() { return 0.0; }
