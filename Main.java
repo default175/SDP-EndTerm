@@ -4,13 +4,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String url = "jdbc:postgresql://localhost:5432/postgres";
-        String username = "postgres";
-        String password = "123";
         Scanner sc = new Scanner(System.in);
         NotificationService notificationService = new NotificationService();
 
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
             HotelManagementFacade hotelFacade = new HotelManagementFacade(connection, notificationService);
 
             Client client = new Client("John Doe", 500.0, sc);
