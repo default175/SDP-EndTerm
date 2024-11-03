@@ -21,5 +21,18 @@ public class HotelManagementFacade {
         }
     }
 
-
+    public static void bookRoomForClient(Connection connection, Client client) throws SQLException {
+        Room[] allRooms = Room.getAllRooms();
+        Room chosenRoom = client.chooseRoom(allRooms); // Получаем выбранную комнату
+        if (chosenRoom != null) { // Проверяем, выбрана ли комната
+            String sql = "UPDATE room SET booked = TRUE WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, chosenRoom.getId()); // Устанавливаем id выбранной комнаты
+                statement.executeUpdate();
+                System.out.println("Room booked for client: " + client.getName());
+            }
+        } else {
+            System.out.println("No room was chosen for client: " + client.getName());
+        }
+    }
 }
