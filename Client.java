@@ -1,8 +1,6 @@
 package org.example;
 import java.util.Scanner;
 import lombok.*;
-import org.example.interfaces.User;
-import org.example.interfaces.Observer;
 
 @Getter
 @Setter
